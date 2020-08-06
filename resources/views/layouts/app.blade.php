@@ -17,6 +17,7 @@
 
     {{-- Temp --}}
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/custom-forms.min.css') }}">
 
 </head>
 <body class="bg-gray-100 h-screen antialiased leading-none">

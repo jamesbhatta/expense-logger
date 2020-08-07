@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Expense;
+use App\Http\Requests\ExpenseRequest;
 use Illuminate\Http\Request;
 
 class ExpenseController extends Controller
@@ -14,7 +15,7 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        //
+        return view('expense.index');
     }
 
     /**
@@ -33,9 +34,10 @@ class ExpenseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ExpenseRequest $request)
     {
-        //
+       $expense = Expense::create($request->all());
+       return redirect()->back()->with('success', 'Added Successfully');
     }
 
     /**

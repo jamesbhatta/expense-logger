@@ -26,8 +26,8 @@ class ExpenseRequest extends FormRequest
         return [
             'title' => 'required',
             'date' => 'date',
-            'price' => 'required',
-            'details' => 'required'
+            'amount' => 'required',
+            'details' => ''
         ];
     }
 }

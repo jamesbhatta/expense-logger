@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Expense;
 use App\Http\Requests\ExpenseRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ExpenseController extends Controller
 {
@@ -13,9 +14,12 @@ class ExpenseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('expense.index');
+        $expenses = Expense::latest('date')->get();
+        return $request->ajax()
+            ? datatables()->of($expenses)->toJson()
+            : view('expense.index', compact(['expenses']));
     }
 
     /**
@@ -25,7 +29,7 @@ class ExpenseController extends Controller
      */
     public function create()
     {
-        //
+        return view('expense.create');
     }
 
     /**
@@ -36,8 +40,10 @@ class ExpenseController extends Controller
      */
     public function store(ExpenseRequest $request)
     {
-       $expense = Expense::create($request->all());
-       return redirect()->back()->with('success', 'Added Successfully');
+        $user = Auth::user();
+        $user->expenses()->create($request->all());
+        // $expense = Expense::create($request->all());
+        return redirect()->back()->with('success', 'Added Successfully');
     }
 
     /**

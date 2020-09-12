@@ -2,42 +2,128 @@
 
 @section('content')
 <div class="md:container mx-auto">
-    <div class="bg-white shadow-sm rounded-md p-6 w-1/2 mx-auto">
-        @if((Session::has('success')))
-        <div class="mb-4">
+    <div class="flex">
+        <div class="text-4xl text-indigo-800 font-bold mr-3"><span class="svg-icon svg-baseline">@include('svg.expenses')</span> Expenses</div>
 
-        </div>
-        @endif
-        <div class="mb-4">
-            <h1 class="font-semibold text-2xl text-gray-700"># Record New Expense</h1>
-        </div>
-        <form action="{{ route('expense.store') }}" method="POST" class="">
-            @csrf
-            <div class="mb-5">
-                <label for="input-title" class="block mb-5 italic">Title</label>
-                <input type="text" name="title" class="block p-2 w-full bg-gray-200 rounded text-gray-700 leading-tight border border-gray-200 focus:bg-white focus:outline-none @error('title') border-red-500 @enderror" id="input-title" placeholder="Title" autofocus>
-                <x-invalid-feedback field="title"></x-invalid-feedback>
-            </div>
-            <div class="mb-5">
-                <label for="input-date" class="block mb-5 italic">Date</label>
-                <input type="text" name="date" class="block p-2 w-full bg-gray-200 rounded text-gray-700 leading-tight border border-gray-200 focus:bg-white focus:outline-none @error('date') border-red-500 @enderror" id="input-date" placeholder="YYYY-MM-DD">
-                <x-invalid-feedback field="date"></x-invalid-feedback>
+    </div>
 
+    <div class="my-6"></div>
+
+    <div class="flex">
+        <div class="self-center mr-3">
+            <button class="bg-indigo-500 hover:bg-indigo-600 text-white font-semibold px-5 py-2 rounded-full focus:outline-none"><span class="svg-icon svg-baseline mr-2 text-base">@include('svg.filter')</span>Filter</button>
+        </div>
+        <div class="self-center">
+            <a href="{{ route('expenses.create') }}" class="border-2 border-indigo-500 hover:bg-indigo-500 text-indigo-600 hover:text-white font-semibold text-sm px-4 py-2 rounded-full focus:outline-none"><span class="svg-icon svg-baseline mr-2 text-base">@include('svg.plus')</span>Add Expense</a>
+        </div>
+        <div class="ml-auto self-center">
+            <div class="bg-white px-4 rounded-full shadow-xs">
+                <span class="svg-icon svg-baseline mr-2 text-base text-gray-500">@include('svg.search')</span>
+                <input type="text" class="py-2 focus:outline-none" placeholder="Search...">
             </div>
-            <div class="mb-5">
-                <label for="input-price" class="block mb-5 italic">Price</label>
-                <input type="number" name="price" class="block p-2 w-full bg-gray-200 rounded text-gray-700 leading-tight border border-gray-200 focus:bg-white focus:outline-none @error('price') border-red-500 @enderror" id="input-price" placeholder="NRs.">
-                <x-invalid-feedback field="price"></x-invalid-feedback>
-            </div>
-            <div class="mb-5">
-                <label for="textarea-details" class="block mb-5 italic">Details</label>
-                <textarea name="details" name="details" class="block p-2 w-full bg-gray-200 rounded text-gray-700 leading-tight border border-gray-200 focus:bg-white focus:outline-none @error('details') border-red-500 @enderror" id="textarea-details" cols="30" rows="10"></textarea>
-                <x-invalid-feedback field="details"></x-invalid-feedback>
-            </div>
-            <div class="mb-5">
-                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold p-4 rounded-full w-1/2 shadow italic">Save</button>
-            </div>
-        </form>
+        </div>
+    </div>
+
+    <div class="my-6"></div>
+
+    <div class="flex">
+        <div class="self-end text-gray-600">
+            Showing 20 of 200 entries
+        </div>
+    </div>
+
+    <div class="my-2"></div>
+
+    <div class="bg-white shadow-sm rounded-lg">
+        <div class="p-5">
+            <table class="table-fized w-full">
+                <thead class="text-indigo-600 text-sm text-left">
+                    <tr class="border-b">
+                        <th class="px-4 py-4"><input type="checkbox"></th>
+                        <th class="px-4 py-4">#</th>
+                        <th class="px-4 py-4">Date</th>
+                        <th class="px-4 py-4">Title</th>
+                        <th class="px-4 py-4">Amount</th>
+                        <th class="px-4 py-4"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($expenses as $expense)
+                    <tr class="text-lg border-b border-dashed">
+                        <td class="px-4 py-5"><input type="checkbox"></td>
+                        <td class="px-4 py-5">{{ $expense->id }}</td>
+                        <td class="px-4 py-5">{{ $expense->date }}</td>
+                        <td class="px-4 py-5">{{ $expense->title }}</td>
+                        <td class="px-4 py-5"><span class="text-m text-gray-600">Rs.</span> {{ number_format($expense->amount) }}</td>
+                        <td class="px-4 py-5">
+                            <a class="table-action bg-gray-200 hover:bg-indigo-500 hover:text-white px-4 py-2 text-indigo-900 text-xs rounded-full mr-2" href=""><span class="svg-icon svg-baseline mr-1 text-base">@include('svg.eye')</span> View</a>
+                            <a class="table-action bg-gray-200 hover:bg-indigo-500 hover:text-white px-4 py-2 text-indigo-900 text-xs rounded-full mr-2" href=""><span class="svg-icon svg-baseline mr-1 text-base">@include('svg.pencil')</span> Edit</a>
+                            <a class="table-action bg-gray-200 hover:bg-indigo-500 hover:text-white px-4 py-2 text-indigo-900 text-xs rounded-full mr-2" href=""><span class="svg-icon svg-baseline mr-1 text-base">@include('svg.trash')</span> Delete</a>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="p-6"></div>
+
+
+    <div class="rounded shadow-sm bg-white hidden">
+        <div class="p-5">
+            <table id="expenses-table" class="table-auto">
+                <thead>
+                    <tr>
+                        <th class="px-4 py-2">#</th>
+                        <th class="px-4 py-2">Date</th>
+                        <th class="px-4 py-2">Title</th>
+                        <th class="px-4 py-2">amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="px-4 py-2">1</td>
+                        <td class="px-4 py-2">2077-04-12</td>
+                        <td class="px-4 py-2">Cooler</td>
+                        <td class="px-4 py-2">14000</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    $(function() {
+        $('#expenses-table').DataTable({
+            "processing": true
+            , "serverSide": true
+            , "ajax": "{{ route('expenses.index') }}"
+            , 'columns': [{
+                    data: 'id'
+                    , name: 'id'
+                    , orderable: false
+                    , searchable: false
+                }
+                , {
+                    data: 'date'
+                    , name: 'date'
+                }
+                , {
+                    data: 'title'
+                    , title: 'title'
+                }
+                , {
+                    data: 'amount'
+                    , name: 'amount'
+                }
+            ]
+        });
+        console.log('created');
+    });
+
+</script>
+@endpush

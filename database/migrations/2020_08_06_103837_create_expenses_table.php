@@ -18,7 +18,7 @@ class CreateExpensesTable extends Migration
             $table->string('title');
             $table->string('amount');
             $table->date('date')->index();
-            $table->text('details');
+            $table->text('details')->nullable();
 
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();

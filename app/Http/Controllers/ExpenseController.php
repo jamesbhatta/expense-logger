@@ -13,7 +13,7 @@ class ExpenseController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -21,6 +21,7 @@ class ExpenseController extends Controller
      */
     public function index(Request $request)
     {
+        return view('expense.index');
         $expenses = Expense::latest('date')->get();
         return $request->ajax()
             ? datatables()->of($expenses)->toJson()

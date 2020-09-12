@@ -26,104 +26,44 @@
 
     <div class="my-6"></div>
 
-    <div class="flex">
-        <div class="self-end text-gray-600">
-            Showing 20 of 200 entries
-        </div>
-    </div>
-
-    <div class="my-2"></div>
-
-    <div class="bg-white shadow-sm rounded-lg">
-        <div class="p-5">
-            <table class="table-fized w-full">
-                <thead class="text-indigo-600 text-sm text-left">
-                    <tr class="border-b">
-                        <th class="px-4 py-4"><input type="checkbox"></th>
-                        <th class="px-4 py-4">#</th>
-                        <th class="px-4 py-4">Date</th>
-                        <th class="px-4 py-4">Title</th>
-                        <th class="px-4 py-4">Amount</th>
-                        <th class="px-4 py-4"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($expenses as $expense)
-                    <tr class="text-lg border-b border-dashed">
-                        <td class="px-4 py-5"><input type="checkbox"></td>
-                        <td class="px-4 py-5">{{ $expense->id }}</td>
-                        <td class="px-4 py-5">{{ $expense->date }}</td>
-                        <td class="px-4 py-5">{{ $expense->title }}</td>
-                        <td class="px-4 py-5"><span class="text-m text-gray-600">Rs.</span> {{ number_format($expense->amount) }}</td>
-                        <td class="px-4 py-5">
-                            <a class="table-action bg-gray-200 hover:bg-indigo-500 hover:text-white px-4 py-2 text-indigo-900 text-xs rounded-full mr-2" href=""><span class="svg-icon svg-baseline mr-1 text-base">@include('svg.eye')</span> View</a>
-                            <a class="table-action bg-gray-200 hover:bg-indigo-500 hover:text-white px-4 py-2 text-indigo-900 text-xs rounded-full mr-2" href=""><span class="svg-icon svg-baseline mr-1 text-base">@include('svg.pencil')</span> Edit</a>
-                            <a class="table-action bg-gray-200 hover:bg-indigo-500 hover:text-white px-4 py-2 text-indigo-900 text-xs rounded-full mr-2" href=""><span class="svg-icon svg-baseline mr-1 text-base">@include('svg.trash')</span> Delete</a>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div>
+    {{-- @livewire('expense-table') --}}
+    <livewire:expense-table />
 
     <div class="p-6"></div>
 
 
-    <div class="rounded shadow-sm bg-white hidden">
-        <div class="p-5">
-            <table id="expenses-table" class="table-auto">
-                <thead>
-                    <tr>
-                        <th class="px-4 py-2">#</th>
-                        <th class="px-4 py-2">Date</th>
-                        <th class="px-4 py-2">Title</th>
-                        <th class="px-4 py-2">amount</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="px-4 py-2">1</td>
-                        <td class="px-4 py-2">2077-04-12</td>
-                        <td class="px-4 py-2">Cooler</td>
-                        <td class="px-4 py-2">14000</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
 </div>
 @endsection
 
 @push('scripts')
 <script>
-    $(function() {
-        $('#expenses-table').DataTable({
-            "processing": true
-            , "serverSide": true
-            , "ajax": "{{ route('expenses.index') }}"
-            , 'columns': [{
-                    data: 'id'
-                    , name: 'id'
-                    , orderable: false
-                    , searchable: false
-                }
-                , {
-                    data: 'date'
-                    , name: 'date'
-                }
-                , {
-                    data: 'title'
-                    , title: 'title'
-                }
-                , {
-                    data: 'amount'
-                    , name: 'amount'
-                }
-            ]
-        });
-        console.log('created');
-    });
+    // $(function() {
+    //     $('#expenses-table').DataTable({
+    //         "processing": true
+    //         , "serverSide": true
+    //         , "ajax": "{{ route('expenses.index') }}"
+    //         , 'columns': [{
+    //                 data: 'id'
+    //                 , name: 'id'
+    //                 , orderable: false
+    //                 , searchable: false
+    //             }
+    //             , {
+    //                 data: 'date'
+    //                 , name: 'date'
+    //             }
+    //             , {
+    //                 data: 'title'
+    //                 , title: 'title'
+    //             }
+    //             , {
+    //                 data: 'amount'
+    //                 , name: 'amount'
+    //             }
+    //         ]
+    //     });
+    //     console.log('created');
+    // });
 
 </script>
 @endpush

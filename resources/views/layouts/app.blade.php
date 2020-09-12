@@ -67,7 +67,7 @@
                         @endif
                         @else
                         <a class="text-gray-300 text-sm pr-4" href="{{ route('home') }}">Dashboard</a>
-                        <a class="text-gray-300 text-sm pr-4" href="{{ route('expense.index') }}">Expenses</a>
+                        <a class="text-gray-300 text-sm pr-4" href="{{ route('expenses.index') }}">Expenses</a>
 
                         <span class="text-gray-300 text-sm pr-4">{{ Auth::user()->name }}</span>
 

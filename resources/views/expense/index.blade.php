@@ -36,34 +36,4 @@
 @endsection
 
 @push('scripts')
-<script>
-    // $(function() {
-    //     $('#expenses-table').DataTable({
-    //         "processing": true
-    //         , "serverSide": true
-    //         , "ajax": "{{ route('expenses.index') }}"
-    //         , 'columns': [{
-    //                 data: 'id'
-    //                 , name: 'id'
-    //                 , orderable: false
-    //                 , searchable: false
-    //             }
-    //             , {
-    //                 data: 'date'
-    //                 , name: 'date'
-    //             }
-    //             , {
-    //                 data: 'title'
-    //                 , title: 'title'
-    //             }
-    //             , {
-    //                 data: 'amount'
-    //                 , name: 'amount'
-    //             }
-    //         ]
-    //     });
-    //     console.log('created');
-    // });
-
-</script>
 @endpush

@@ -42,28 +42,6 @@ return [
                 ]
             ]
         ],
-        'email' => [
-            'title' => 'Email Settings',
-            'descriptions' => 'How app email will be sent.',
-            'icon' => 'fa fa-envelope',
-
-            'inputs' => [
-                [
-                    'name' => 'from_email',
-                    'type' => 'email',
-                    'label' => 'From Email',
-                    'placeholder' => 'Application from email',
-                    'rules' => 'required|email',
-                ],
-                [
-                    'name' => 'admin_user',
-                    'type' => 'text',
-                    'label' => 'Admin Username',
-                    'placeholder' => 'Username of the site admin',
-                    'rules' => 'required',
-                ],
-            ]
-        ]
     ],
 
     // Setting page url, will be used for get and post request

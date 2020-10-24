@@ -14,7 +14,7 @@
             <button class="bg-indigo-500 hover:bg-indigo-600 text-white font-semibold px-5 py-2 rounded-full focus:outline-none"><span class="svg-icon svg-baseline mr-2 text-base">@include('svg.filter')</span>Filter</button>
         </div>
         <div class="self-center">
-            <a href="{{ route('expenses.create') }}" class="border-2 border-indigo-500 hover:bg-indigo-500 text-indigo-600 hover:text-white font-semibold text-sm px-4 py-2 rounded-full focus:outline-none"><span class="svg-icon svg-baseline mr-2 text-base">@include('svg.plus')</span>Add Expense</a>
+            <livewire:expense-form-button />
         </div>
         <div class="ml-auto self-center">
             <div class="bg-white px-4 rounded-full shadow-xs">
@@ -25,6 +25,8 @@
     </div>
 
     <div class="my-6"></div>
+
+    <livewire:expense-form />
 
     {{-- @livewire('expense-table') --}}
     <livewire:expense-table />

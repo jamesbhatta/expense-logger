@@ -13,7 +13,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($expenses as $expense)
+                    @forelse ($expenses as $expense)
                     <tr class="text-lg border-b border-dashed">
                         <td class="px-4 py-5"><input type="checkbox"></td>
                         <td class="px-4 py-5">{{ $expense->id }}</td>
@@ -26,7 +26,11 @@
                             <a class="table-action bg-gray-200 hover:bg-indigo-500 hover:text-white px-4 py-2 text-indigo-900 text-xs rounded-full mr-2" href=""><span class="svg-icon svg-baseline mr-1 text-base">@include('svg.trash')</span> Delete</a>
                         </td>
                     </tr>
-                    @endforeach
+                    @empty
+                    <tr class="text-lg border-b border-dashed">
+                        <td colspan="42" class="px-4 py-5 text-center italic">No Records found</td>
+                    </tr>
+                    @endforelse
                 </tbody>
             </table>
 

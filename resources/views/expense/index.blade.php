@@ -17,10 +17,7 @@
             <livewire:expense-form-button />
         </div>
         <div class="ml-auto self-center">
-            <div class="bg-white px-4 rounded-full shadow-xs">
-                <span class="svg-icon svg-baseline mr-2 text-base text-gray-500">@include('svg.search')</span>
-                <input type="text" class="py-2 focus:outline-none" placeholder="Search...">
-            </div>
+           <livewire:expense-search />
         </div>
     </div>
 

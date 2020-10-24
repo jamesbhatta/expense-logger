@@ -10,16 +10,27 @@ class ExpenseTable extends Component
 {
     use WithPagination;
 
-    protected $listeners = ['expenseAdded'];
+    public $searchString;
+
+    protected $listeners = ['expenseAdded', 'expenseSearchInitiated' => 'setExpenseSearchString'];
 
     public function expenseAdded()
     {
         //
     }
 
+    public function setExpenseSearchString($searchString)
+    {
+        $this->searchString = $searchString;
+    }
+
     public function render()
     {
-        $expenses = Expense::latest('date')->paginate(15);
+        $expenses = Expense::latest('date');
+        if ($this->searchString) {
+            $expenses = $expenses->where('title', 'like', '%' . $this->searchString . '%');
+        }
+        $expenses = $expenses->paginate(15);
 
         return view('livewire.expense-table', compact(
             'expenses'

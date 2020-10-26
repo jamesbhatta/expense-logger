@@ -15,7 +15,7 @@
             <x-invalid-feedback field="title"></x-invalid-feedback>
         </div>
         <div class="mb-5">
-            <input type="text" wire:model="date" name="date" class="block p-2 w-full bg-gray-100 rounded text-gray-700 leading-tight border border-gray-200 focus:bg-white focus:outline-none @error('date') border-red-500 @enderror" id="input-date" placeholder="YYYY-MM-DD">
+            <input type="date" wire:model="date" name="date" class="block p-2 w-full bg-gray-100 rounded text-gray-700 leading-tight border border-gray-200 focus:bg-white focus:outline-none @error('date') border-red-500 @enderror" id="input-date" placeholder="YYYY-MM-DD">
             <x-invalid-feedback field="date"></x-invalid-feedback>
 
         </div>

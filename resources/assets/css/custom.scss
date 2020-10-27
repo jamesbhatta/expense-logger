@@ -1,0 +1,25 @@
+html {
+    line-height: 1.65;
+}
+
+/* SVG icons */
+
+.svg-icon {
+    display: inline-flex;
+    align-self: center;
+    fill: currentColor;
+
+    svg {
+        height: 1em;
+        width: 1em;
+    }
+    &.svg-baseline svg {
+        top: 0.125em;
+        position: relative;
+    }
+}
+/* Focus:outline-none */
+
+.focus:outline-none {
+    outline: none;
+}

@@ -14,18 +14,20 @@
             <button class="bg-indigo-500 hover:bg-indigo-600 text-white font-semibold px-5 py-2 rounded-full focus:outline-none"><span class="svg-icon svg-baseline mr-2 text-base">@include('svg.filter')</span>Filter</button>
         </div>
         <div class="self-center">
-            <livewire:expense-form-button />
+            <button type="button" class="modal-open border-2 border-indigo-500 hover:bg-indigo-500 text-indigo-600 hover:text-white font-semibold text-sm px-4 py-2 rounded-full focus:outline-none" data-toggle="modal" data-target="#expenseFormModal">
+                <span class="svg-icon svg-baseline mr-2 text-base">@include('svg.plus')</span>Add Expense
+            </button>
         </div>
         <div class="ml-auto self-center">
-           <livewire:expense-search />
+            <livewire:expense-search />
         </div>
     </div>
 
     <div class="my-6"></div>
 
+    {{-- New Expense Modal --}}
     <livewire:expense-form />
 
-    {{-- @livewire('expense-table') --}}
     <livewire:expense-table />
 
     <div class="p-6"></div>
@@ -35,4 +37,45 @@
 @endsection
 
 @push('scripts')
+
+<script>
+    var openmodal = document.querySelectorAll('.modal-open')
+    for (var i = 0; i < openmodal.length; i++) {
+        openmodal[i].addEventListener('click', function(event) {
+            event.preventDefault()
+            toggleModal()
+        })
+    }
+
+    const overlay = document.querySelector('.modal-overlay')
+    overlay.addEventListener('click', toggleModal)
+
+    var closemodal = document.querySelectorAll('.modal-close')
+    for (var i = 0; i < closemodal.length; i++) {
+        closemodal[i].addEventListener('click', toggleModal)
+    }
+
+    document.onkeydown = function(evt) {
+        evt = evt || window.event
+        var isEscape = false
+        if ("key" in evt) {
+            isEscape = (evt.key === "Escape" || evt.key === "Esc")
+        } else {
+            isEscape = (evt.keyCode === 27)
+        }
+        if (isEscape && document.body.classList.contains('modal-active')) {
+            toggleModal()
+        }
+    };
+
+
+    function toggleModal() {
+        const body = document.querySelector('body')
+        const modal = document.querySelector('.modal')
+        modal.classList.toggle('opacity-0')
+        modal.classList.toggle('pointer-events-none')
+        body.classList.toggle('modal-active')
+    }
+
+</script>
 @endpush

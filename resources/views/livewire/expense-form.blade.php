@@ -1,15 +1,7 @@
-<div id="expense-form" class="bg-white p-4 md:max-w-xl mx-auto mb-4 shadow-lg rounded-lg @if(!$visible) h-0 overflow-hidden opacity-0 @endif">
-    <style>
-        #expense-form {
-            transition: all .5s linear;
-        }
+<x-modal id="expenseFormModal" submit="storeExpense" wire:ignore.self>
+    <x-slot name="title">Record New Expense</x-slot>
 
-    </style>
-    <div class="mb-4">
-        <h1 class="font-semibold text-2xl text-indigo-900"># Record New Expense</h1>
-    </div>
-
-    <form wire:submit.prevent="storeExpense" method="POST" class="">
+    <x-slot name="content">
         <div class="mb-5">
             <input type="text" wire:model="title" name="title" class="block p-2 w-full bg-gray-100 rounded text-gray-700 leading-tight border border-gray-200 focus:bg-white focus:outline-none @error('title') border-red-500 @enderror" id="input-title" value="{{ old('title') }}" placeholder="Title" autofocus>
             <x-invalid-feedback field="title"></x-invalid-feedback>
@@ -27,9 +19,16 @@
             <textarea name="details" wire:model="details" name="details" class="block p-2 w-full bg-gray-100 rounded text-gray-700 leading-tight border border-gray-200 focus:bg-white focus:outline-none @error('details') border-red-500 @enderror" id="textarea-details" cols="30" rows="10"></textarea>
             <x-invalid-feedback field="details"></x-invalid-feedback>
         </div>
-        <div class="mb-5 flex">
-            <button type="submit" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold px-6 py-2 rounded-lg">Save</button>
-            <button wire:click="closeExpenseForm" type="reset" class="ml-auto hover:bg-gray-200 text-red-500 font-bold px-6 py-2 rounded-lg">Cancel</button>
-        </div>
-    </form>
-</div>
+        @if (session()->has('expenseAdded'))
+        <script>
+            toggleModal();
+
+        </script>
+        @endif
+    </x-slot>
+
+    <x-slot name="actions">
+        <button type="submit" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold px-6 py-2 rounded-lg">Save</button>
+        <button type="reset" class="modal-close ml-auto hover:bg-gray-200 text-red-500 font-bold px-6 py-2 rounded-lg">Cancel</button>
+    </x-slot>
+</x-modal>

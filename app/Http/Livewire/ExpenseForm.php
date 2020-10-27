@@ -6,28 +6,18 @@ use Livewire\Component;
 
 class ExpenseForm extends Component
 {
-    public $visible, $title, $date, $amount, $details;
+    public $title, $date, $amount, $details;
 
     protected $listeners = ['showExpenseForm'];
 
     public function mount()
     {
-        $this->visible = false;
-    }
-
-    public function showExpenseForm()
-    {
-        $this->visible = true;
-    }
-
-    public function closeExpenseForm()
-    {
-        $this->visible = false;
-        $this->emit('closeExpenseForm');
     }
 
     public function storeExpense()
     {
+        $this->resetErrorBag();
+
         $this->validate([
             'title' => 'required',
             'date' => 'date',
@@ -43,7 +33,7 @@ class ExpenseForm extends Component
         ]);
 
         $this->emit('expenseAdded');
-        $this->closeExpenseForm();
+        session()->flash('expenseAdded', 'Saved');
     }
 
     public function render()

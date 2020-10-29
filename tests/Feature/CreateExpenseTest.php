@@ -11,6 +11,8 @@ use Tests\TestCase;
 
 class CreateExpenseTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function setup(): void
     {
         parent::setUp();
@@ -56,8 +58,8 @@ class CreateExpenseTest extends TestCase
     }
 
     /** @test */
-    public function session_has_expense_added_after_successfully_creating_expense()
-    {
-        // $this->newExpensePipeline()->assertSessionHas('expenseAdded');
-    }
+    // public function session_has_expense_added_after_successfully_creating_expense()
+    // {
+    //     $this->newExpensePipeline()->assertSessionHas('expenseAdded');
+    // }
 }

@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Expense;
 use App\Http\Livewire\ExpenseForm;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;
@@ -55,6 +56,15 @@ class CreateExpenseTest extends TestCase
     public function expense_added_event_is_emitted_after_creating_expense()
     {
         $this->newExpensePipeline()->assertEmitted('expenseAdded');
+    }
+
+    /** @test */
+    public function date_is_instance_of_carbon()
+    {
+        $this->newExpensePipeline();
+        $expense = Expense::first();
+        $this->assertInstanceOf(Carbon::class, $expense->date);
+        $this->assertEquals('2020/02/20', $expense->date->format('Y/m/d'));
     }
 
     /** @test */
